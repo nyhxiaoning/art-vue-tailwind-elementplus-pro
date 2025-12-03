@@ -1,3 +1,4 @@
+import { IframeRouteManager, MenuProcessor, RoutePermissionValidator, RouteRegistry } from '../core'
 /**
  * 路由全局前置守卫模块
  *
@@ -35,23 +36,23 @@
  * @module router/guards/beforeEach
  * @author Art Design Pro Team
  */
-import type { Router, RouteLocationNormalized, NavigationGuardNext } from 'vue-router'
-import { nextTick } from 'vue'
+import type { NavigationGuardNext, RouteLocationNormalized, Router } from 'vue-router'
+
+import { ApiStatus } from '@/utils/http/status'
 import NProgress from 'nprogress'
+import { RoutesAlias } from '../routesAlias'
+import { fetchGetUserInfo } from '@/api/auth'
+import { isHttpError } from '@/utils/http/error'
+import { loadingService } from '@/utils/ui'
+import { nextTick } from 'vue'
+import { setPageTitle } from '@/utils/router'
+import { setWorktab } from '@/utils/navigation'
+import { staticRoutes } from '../routes/staticRoutes'
+import { useCommon } from '@/hooks/core/useCommon'
+import { useMenuStore } from '@/store/modules/menu'
 import { useSettingStore } from '@/store/modules/setting'
 import { useUserStore } from '@/store/modules/user'
-import { useMenuStore } from '@/store/modules/menu'
-import { setWorktab } from '@/utils/navigation'
-import { setPageTitle } from '@/utils/router'
-import { RoutesAlias } from '../routesAlias'
-import { staticRoutes } from '../routes/staticRoutes'
-import { loadingService } from '@/utils/ui'
-import { useCommon } from '@/hooks/core/useCommon'
 import { useWorktabStore } from '@/store/modules/worktab'
-import { fetchGetUserInfo } from '@/api/auth'
-import { ApiStatus } from '@/utils/http/status'
-import { isHttpError } from '@/utils/http/error'
-import { RouteRegistry, MenuProcessor, IframeRouteManager, RoutePermissionValidator } from '../core'
 
 // 路由注册器实例
 let routeRegistry: RouteRegistry | null = null
@@ -151,6 +152,7 @@ async function handleRouteGuard(
     NProgress.start()
   }
 
+  debugger
   // 1. 检查登录状态
   if (!handleLoginStatus(to, userStore, next)) {
     return

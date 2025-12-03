@@ -225,6 +225,8 @@
         password
       })
 
+      debugger
+
       // 验证token
       if (!token) {
         throw new Error('Login failed - no token received')

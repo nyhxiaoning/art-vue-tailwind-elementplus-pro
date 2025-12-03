@@ -46,7 +46,8 @@ export function fetchRegister(params: any) {
 export async function fetchGetUserInfo(): Promise<Api.Auth.UserInfo> {
   try {
     return await request.get<Api.Auth.UserInfo>({
-      url: '/system/user/v2/info',
+      ///v2/system/user/info
+      url: 'v2/system/user/info',
       method: 'get',
       timeout: 20000
     })

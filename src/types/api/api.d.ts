@@ -79,7 +79,7 @@ declare namespace Api {
       buttons: string[]
       roles: string[]
       userId: number
-      userName: string
+      userName?: string
       email: string
       avatar?: string
     }
@@ -95,9 +95,9 @@ declare namespace Api {
       id: number
       avatar: string
       status: string
-      userName: string
+      userName?: string
       userGender: string
-      nickName: string
+      nickName?: string
       userPhone: string
       userEmail: string
       userRoles: string[]
@@ -109,8 +109,10 @@ declare namespace Api {
 
     /** 用户搜索参数 */
     type UserSearchParams = Partial<
-      Pick<UserListItem, 'id' | 'userName' | 'userGender' | 'userPhone' | 'userEmail' | 'status'> &
-        Api.Common.CommonSearchParams
+      Pick<
+        UserListItem,
+        'id' | 'userName' | 'nickName' | 'userGender' | 'userPhone' | 'userEmail' | 'status'
+      > & Api.Common.CommonSearchParams
     >
 
     /** 角色列表 */
@@ -129,7 +131,7 @@ declare namespace Api {
     /** 角色搜索参数 */
     type RoleSearchParams = Partial<
       Pick<RoleListItem, 'roleId' | 'roleName' | 'roleCode' | 'description' | 'enabled'> &
-        Api.Common.CommonSearchParams
+      Api.Common.CommonSearchParams
     >
   }
 }

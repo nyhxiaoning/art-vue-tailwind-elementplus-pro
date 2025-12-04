@@ -118,6 +118,6 @@ function buildMockRoleList(params: Record<string, any>): Api.SystemManage.RoleLi
 // 获取菜单列表
 export function fetchGetMenuList() {
   return request.get<AppRouteRecord[]>({
-    url: '/api/v3/system/menus'
+    url: '/api/v3/system/menus/simple'
   })
 }

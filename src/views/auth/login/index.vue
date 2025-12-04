@@ -238,7 +238,7 @@
 
       // 登录成功处理
       showLoginSuccessNotice()
-
+     loading.value = false
       // 获取 redirect 参数，如果存在则跳转到指定页面，否则跳转到首页
       const redirect = route.query.redirect as string
       router.push(redirect || '/')
